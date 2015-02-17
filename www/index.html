@@ -28,10 +28,6 @@
 
             document.addEventListener("deviceready", onDeviceReady, false);
             function onDeviceReady() {
-                $("#1").click(function(){
-                    alert("sharing");
-                    $cordovaSocialSharing.share('Message only');
-                });
             }
         </script>
     </head>
@@ -41,21 +37,11 @@
         -->
     <ion-nav-bar class="bar-stable">
         <ion-nav-back-button>
+    <button id="1" onclick="window.plugins.socialsharing.share('Message only')">message only</button>
         </ion-nav-back-button>
     </ion-nav-bar>
 
-    <br><br>
-    <br><br>
-    <button id="1">message only</button><br><br>
-    <button id="2" onclick="$cordovaSocialSharing.share('Message and subject', 'The subject')">message and subject</button><br><br>
-    <button id="3" onclick="$cordovaSocialSharing.share(null, null, null, 'http://www.x-services.nl')">link only</button><br><br>
-    <button id="4" onclick="$cordovaSocialSharing.share('Message and link', null, null, 'http://www.x-services.nl')">message and link</button><br><br>
-    <button id="5" onclick="$cordovaSocialSharing.share(null, null, 'https://www.google.nl/images/srpr/logo4w.png', null)">image only</button><br><br>
-    <button id="6" onclick="$cordovaSocialSharing.share(null, 'Android filename', 'data:image/png;base64,R0lGODlhDAAMALMBAP8AAP///wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAUKAAEALAAAAAAMAAwAQAQZMMhJK7iY4p3nlZ8XgmNlnibXdVqolmhcRQA7', null)">base64 image only</button><br><br>
-    <button id="7" onclick="$cordovaSocialSharing.share('Message and image', null, 'https://www.google.nl/images/srpr/logo4w.png', null)">message and image</button><br><br>
-    <button id="8" onclick="$cordovaSocialSharing.share('Message, image and link', null, 'https://www.google.nl/images/srpr/logo4w.png', 'http://www.x-services.nl')">message, image and link</button><br><br>
-    <button id="9" onclick="$cordovaSocialSharing.share('Message, subject, image and link', 'The subject', 'https://www.google.nl/images/srpr/logo4w.png', 'http://www.x-services.nl')">message, subject, image and link</button><br><br>
-    
+ 
     <!--
       The views will be rendered in the <ion-nav-view> directive below
       Templates are in the /templates folder (but you could also
