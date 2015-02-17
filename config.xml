@@ -1,19 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <widget xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0" id="com.ionicframework.maktab716100" version="0.0.1">
-  <name>maktab</name>
-  <description>
+    <name>maktab</name>
+    <description>
         An Ionic Framework and Cordova project.
     </description>
-  <author email="hi@ionicframework" href="http://ionicframework.com/">
-      Ionic Framework Team
+    <author email="hi@ionicframework" href="http://ionicframework.com/">
+        Ionic Framework Team
     </author>
-  <content src="index.html"/>
-  <access origin="*"/>
-  <preference name="webviewbounce" value="false"/>
-  <preference name="UIWebViewBounce" value="false"/>
-  <preference name="DisallowOverscroll" value="true"/>
-  <preference name="BackupWebStorage" value="none"/>
-  <feature name="StatusBar">
-    <param name="ios-package" onload="true" value="CDVStatusBar"/>
-  </feature>
+    <content src="index.html"/>
+    <access origin="*"/>
+    <preference name="webviewbounce" value="false"/>
+    <preference name="UIWebViewBounce" value="false"/>
+    <preference name="DisallowOverscroll" value="true"/>
+    <preference name="BackupWebStorage" value="none"/>
+    <feature name="StatusBar">
+        <param name="ios-package" onload="true" value="CDVStatusBar"/>
+    </feature>
+    <feature name="SocialSharing">
+        <param name="android-package" value="nl.xservices.plugins.SocialSharing"/>
+    </feature>
+    <gap:plugin name="nl.x-services.plugins.socialsharing" source="plugins.cordova.io" />
 </widget>
