@@ -7,7 +7,7 @@
 
 <!-- stylesheet -->
 <link href="lib/ionic/css" rel="stylesheet">
-<link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
 <link href="css/style.css" rel="stylesheet">
 
 <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
@@ -51,7 +51,7 @@
     <div class="page-header">
       <h1>
       	<span class="glyphicon glyphicon-tower"></span> 
-        Submit Form with Http Request (Angular)
+        Compete
       </h1>
 	  <button style="float:right;" class="btn btn-primary btn-xs" onclick="window.plugins.socialsharing.share('Message only')">Share</button>
     </div>
@@ -67,13 +67,13 @@
       
       <!-- TEL -->
       <div id="tel-group" class="form-group" ng-class="{ 'has-error' : errorTel }">
-        <input type="int" name="tel" class="form-control" placeholder="Phone number" ng-model="formData.tel">
+        <input type="tel" name="tel" class="form-control" placeholder="Phone number" ng-model="formData.tel">
         <span class="help-block" ng-show="errorTel"></span>
       </div>
       
       <!-- Email -->
       <div id="email-group" class="form-group" ng-class="{ 'has-error' : errorEmail }">
-        <input type="text" name="name" class="form-control" placeholder="Email" ng-model="formData.email">
+        <input type="email" name="name" class="form-control" placeholder="Email" ng-model="formData.email">
         <span class="help-block" ng-show="errorEmail"></span>
       </div>     
 
