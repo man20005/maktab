@@ -32,6 +32,14 @@
 </head>
 
 <body ng-app="formApp" ng-controller="formController">
+  <ion-tabs class="tabs-positive">
+    <ion-tab icon="ion-home" ui-sref="home">
+      <ion-nav-view name="home"></ion-nav-view>
+    </ion-tab>
+    <ion-tab icon="ion-help" ui-sref="help">
+      <ion-nav-view name="help"></ion-nav-view>
+    </ion-tab>
+  </ion-tabs>
 <!--
       The nav bar that will be updated as we navigate between views.
     -->
@@ -55,8 +63,10 @@
       </h1>
 	  <button style="float:right;" class="btn btn-primary btn-xs" onclick="window.plugins.socialsharing.share('Message only')">Share</button>
     </div>
-    <!-- SHOW ERROR/SUCCESS MESSAGES -->
+    <!-- SHOW ERROR/SUCCESS MESSAGES
     <div id="messages" class="well" ng-show="message"></div>
+    -->
+    
     <!-- FORM -->
     <form ng-submit="processForm(formData)">
       <!-- NAME -->
@@ -73,13 +83,24 @@
       
       <!-- Email -->
       <div id="email-group" class="form-group" ng-class="{ 'has-error' : errorEmail }">
-        <input type="email" name="name" class="form-control" placeholder="Email" ng-model="formData.email">
+        <input type="email" name="email" class="form-control" placeholder="Email" ng-model="formData.email">
         <span class="help-block" ng-show="errorEmail"></span>
-      </div>     
+      </div>   
+
+      <!-- Select -->
+      <div id="select-group" class="form-group" ng-class="{ 'has-error' : errorSelect }">
+        <select name="select" class="form-control" ng-model="formData.select">
+          <option value="volvo" selected>Volvo</option>
+          <option value="saab">Saab</option>
+          <option value="mercedes">Mercedes</option>
+          <option value="audi">Audi</option>
+        </select>  
+        <span class="help-block" ng-show="errorSelect"></span>
+      </div>       
 
       <!-- DESCRIPTION -->
       <div id="desc-group" class="form-group" ng-class="{ 'has-error' : errorDesc }">
-        <input type="text" name="name" class="form-control" placeholder="Free text" ng-model="formData.desc">
+        <input type="text" name="desc" class="form-control" placeholder="Free text" ng-model="formData.desc">
         <span class="help-block" ng-show="errorDesc"></span>
       </div>
             

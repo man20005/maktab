@@ -16,6 +16,7 @@
   },
   "cordovaPlugins": [
     "https://github.com/phonegap-build/PushPlugin.git",
-    "https://github.com/EddyVerbruggen/SocialSharing-PhoneGap-Plugin.git"
+    "https://github.com/EddyVerbruggen/SocialSharing-PhoneGap-Plugin.git",
+    "org.apache.cordova.splashscreen"
   ]
 }

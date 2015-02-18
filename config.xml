@@ -2,17 +2,20 @@
 <widget xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0" id="com.ionicframework.maktab716100" version="0.0.1">
   <name>maktab</name>
   <description>
-        An Ionic Framework and Cordova project.
+        Maktab Rajhi
     </description>
-  <author email="hi@ionicframework" href="http://ionicframework.com/">
-      Ionic Framework Team
+  <author email="support@wasmiah.com" href="http://wasmiah.com">
+      Wasmiah IT
     </author>
+  <icon src="www/image/Al-Rajhi-Bank.9" />
   <content src="index.html"/>
   <access origin="*"/>
   <preference name="webviewbounce" value="false"/>
   <preference name="UIWebViewBounce" value="false"/>
   <preference name="DisallowOverscroll" value="true"/>
   <preference name="BackupWebStorage" value="none"/>
+  <preference name="SplashScreen" value="foo" />
+  <preference name="SplashScreenDelay" value="10000" />
   <feature name="StatusBar">
     <param name="android-package" onload="true" value="org.apache.cordova.statusbar"/>
   </feature>

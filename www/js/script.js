@@ -1,3 +1,27 @@
+var app = angular.module('formApp', ['ionic'])
+
+app.config(function($stateProvider, $urlRouterProvider) {
+  $urlRouterProvider.otherwise('/home')
+
+  $stateProvider.state('home', {
+    url: '/home',
+    views: {
+      home: {
+        templateUrl: 'home.html'
+      }
+    }
+  })
+
+  $stateProvider.state('help', {
+    url: '/help',
+    views: {
+      help: {
+        templateUrl: 'help.html'
+      }
+    }
+  })
+})
+
 angular.module("formApp", []).controller("formController", function($scope, $http) {
 
 // create a blank object to hold our form information
