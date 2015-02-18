@@ -1,1 +1,3 @@
-/* Silence is Gold */
+div.container div div.page-header {
+	border-bottom: none !important;
+}
