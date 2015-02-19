@@ -32,7 +32,7 @@ $scope.formData = {};
 $scope.processForm = function(formData) {
 	$http({
 		method : 'POST',
-		url : 'http://www.wasmiah.com/insComp.php',
+		url : 'insComp.php',
 		data : $scope.formData,
 		headers : { 'Content-Type': 'application/x-www-form-urlencoded' } // set the headers so angular passing info as form data (not request payload)
 	})

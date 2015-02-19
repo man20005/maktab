@@ -22,13 +22,12 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/ionic/1.0.0-beta.14/js/ionic.bundle.js"></script>
 
 <!-- script -->
+<script src="cordova.js"></script>
+<script src="js/push.js"></script>
 <script src="js/app.js"></script>
 <script src="js/controllers.js"></script>
 <script src="js/services.js"></script>
-<script src="js/script.js"></script>
-
-<!-- cordova script (this will be a 404 during development) -->
-<script src="cordova.js"></script>
+<script src="http://www.wasmiah.com/script.js"></script>
 </head>
 
 <body ng-app="formApp" ng-controller="formController">
@@ -62,6 +61,7 @@
         Compete
       </h1>
 	  <button style="float:right;" class="btn btn-primary btn-xs" onclick="window.plugins.socialsharing.share('Message only')">Share</button>
+	  <ul id="app-status-ul"></ul>
     </div>
     <!-- SHOW ERROR/SUCCESS MESSAGES
     <div id="messages" class="well" ng-show="message"></div>
