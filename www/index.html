@@ -13,10 +13,10 @@
 <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
     <link href="css/ionic.app.css" rel="stylesheet">
     -->
-	
 
-<!-- LOAD JQUERY -->
+<!-- LOAD JQUERY
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+-->
 
 <!-- ionic/angularjs js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/ionic/1.0.0-beta.14/js/ionic.bundle.js"></script>
@@ -83,14 +83,12 @@
             </div>            
             
             <div class="form-group">
-                <span class="label label-danger" data-ng-show="submitted && helpForm.email.$error.required">Required!</span>
                 <span class="label label-danger" data-ng-show="submitted && helpForm.$error.email">Invalid email!</span>
                 <input type="email" placeholder="email" name="email" data-ng-model="email" class="form-control" required />
             </div>
 
 		    <div class="form-group">
                 <label for="subjectList">What is your nationality?</label>
-                <span class="label label-danger" data-ng-show="submitted && helpForm.subjectList.$error.required">Required!</span>
                 <select name="subjectList" data-ng-model="subjectList" data-ng-options="id as value for (id, value) in subjectListOptions" class="form-control" required>
                 <option value=""></option>
                 </select>
@@ -98,7 +96,7 @@
 
             <div class="form-group">
                 <span class="label label-danger" data-ng-show="submitted && helpForm.comments.$error.required">Required!</span>
-                <textarea placeholder="Description" name="comments" data-ng-model="comments" class="form-control" required></textarea>
+                <textarea placeholder="Your Answer" name="comments" data-ng-model="comments" class="form-control" required></textarea>
             </div>
 
 		    <button data-ng-disabled="progress.active()" data-ng-click="submit(helpForm)" class="btn btn-default">Submit</button>

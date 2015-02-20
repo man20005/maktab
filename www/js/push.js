@@ -7,10 +7,10 @@ document.addEventListener("deviceready", function() {
 	//if ( device.platform == 'android' || device.platform == 'Android' || device.platform == "amazon-fireos" ){
 		pushNotification.register(
 		function successHandler (result) {
-			alert('result = ' + result);
+			//alert('result = ' + result);
 		},
 		function errorHandler (error) {
-			alert('error = ' + error);
+			//alert('error = ' + error);
 		},
 		{
 			"senderID":"326664104714",
@@ -44,7 +44,7 @@ document.addEventListener("deviceready", function() {
 	
 	// Android and Amazon Fire OS
 	window.onNotification = function(e) {
-		alert(e.regID);
+		//alert(e.regID);
 		$("#app-status-ul").append('<li>EVENT -> RECEIVED:' + e.event + '</li>');
 
 		switch( e.event )

@@ -3,7 +3,7 @@ function onLoad() {
 }
 
 function onDeviceReady() {
-  var myHostToObserve = "www.wasmiah.com";
+  var myHostToObserve = "http://www.wasmiah.com";
 
   document.removeEventListener('deviceready', onDeviceReady, false);
 
@@ -81,18 +81,21 @@ angular.module('myApp', ['ajoslin.promise-tracker'])
 
       // Default values for the request.
       var config = {
-        params : {
-          'callback' : 'JSON_CALLBACK',
           'name' : $scope.name,
           'tel' : $scope.tel,		  
           'email' : $scope.email,
           'subjectList' : $scope.subjectList,
           'desc' : $scope.comments
-        },
       };
 
-      // JSONP request
-      var $promise = $http.jsonp('http://wasmiah.com/dev/insComp.php', config)
+      // Ajax
+      var $promise = 
+	  	$http({
+			method: 'POST',
+			url: 'http://www.wasmiah.com/dev/insComp.php',
+			data: config,
+			headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+		})
         .success(function(data, status, headers, config) {
           if (data.status == 'OK') {
             $scope.name = null;
@@ -113,13 +116,13 @@ angular.module('myApp', ['ajoslin.promise-tracker'])
           $log.error(data);
         })
         .finally(function() {
-          // Hide status messages after three seconds.
+          // Hide status messages after three seconds
           $timeout(function() {
             $scope.messages = null;
           }, 3000);
         });
 
-      // Track the request and show its progress to the user.
+      // Track the request and show its progress to the user
       $scope.progress.addPromise($promise);
-    };
-  });
+	};
+});

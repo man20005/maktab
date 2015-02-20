@@ -2,9 +2,9 @@
 <widget xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0" id="com.ionicframework.maktab716100" version="0.0.1">
   <name>maktab</name>
   <description>
-        Maktab Rajhi
+        Maktab Hafr Batn
     </description>
-  <author email="support@wasmiah.com" href="http://wasmiah.com">
+  <author email="support@wasmiah.com" href="http://www.wasmiah.com">
       Wasmiah IT
     </author>
   <icon src="www/image/Al-Rajhi-Bank.9" />
@@ -14,8 +14,8 @@
   <preference name="UIWebViewBounce" value="false"/>
   <preference name="DisallowOverscroll" value="true"/>
   <preference name="BackupWebStorage" value="none"/>
-  <preference name="SplashScreen" value="foo" />
-  <preference name="SplashScreenDelay" value="10000" />
+  <preference name="SplashScreen" value="splash" />
+  <preference name="SplashScreenDelay" value="3000" />
   <feature name="StatusBar">
     <param name="android-package" onload="true" value="org.apache.cordova.statusbar"/>
   </feature>
