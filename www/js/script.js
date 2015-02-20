@@ -1,51 +1,125 @@
-var app = angular.module('formApp', ['ionic'])
+function onLoad() {
+	document.addEventListener("deviceready", onDeviceReady, false);
+}
 
-app.config(function($stateProvider, $urlRouterProvider) {
-  $urlRouterProvider.otherwise('/home')
+function onDeviceReady() {
+  var myHostToObserve = "www.wasmiah.com";
 
-  $stateProvider.state('home', {
-    url: '/home',
-    views: {
-      home: {
-        templateUrl: 'home.html'
+  document.removeEventListener('deviceready', onDeviceReady, false);
+
+  document.addEventListener(connectivity.events.onReachabilityChanged, onReachabilityChanged, false)
+  connectivity.observeRemoteHostName(myHostToObserve);
+}
+
+function onReachabilityChanged(e) {
+  console.log(e.interface);
+  switch(e.interface) {
+	case connectivity.DISCONNECTED:
+	  console.log('DISCONNECTED');
+	  break;
+	case WIFI:
+	  console.log('WIFI');
+	  break;
+	case WIMAX:
+	  console.log('WIMAX');
+	  break;
+	case ETHERNET:
+	  console.log('ETHERNET');
+	  break;
+	case MOBILE:
+	  console.log('MOBILE');
+	  break;
+	case UNDEFINED:
+	  console.log('UNDEFINED');
+	  break;
+  }
+
+  if (e.connected) {
+	console.log("Is connected");
+  } else {
+	console.log("Is not connected");
+  }
+
+  switch(e.observer) {
+	case HOST:
+	  console.log('HOST');
+	  break;
+	case INTERNET:
+	  console.log('INTERNET');
+	  break;
+	case LOCALWIFI:
+	  console.log('LOCALWIFI');
+	  break;
+  }
+}
+
+/**
+ * Process the form
+ */
+angular.module('myApp', ['ajoslin.promise-tracker'])
+  .controller('help', function ($scope, $http, $log, promiseTracker, $timeout) {
+    $scope.subjectListOptions = {
+      'swedish': 'Swedish',		
+      'indonesia': 'Indonesia',
+      'ethiopia': 'Ethiopia',
+      'Uganda': 'Uganda',
+      'other': 'Other'
+    };
+
+    // Inititate the promise tracker to track form submissions.
+    $scope.progress = promiseTracker();
+
+    // Form submit handler.
+    $scope.submit = function(form) {
+      // Trigger validation flag.
+      $scope.submitted = true;
+
+      // If form is invalid, return and let AngularJS show validation errors.
+      if (form.$invalid) {
+        return;
       }
-    }
-  })
 
-  $stateProvider.state('help', {
-    url: '/help',
-    views: {
-      help: {
-        templateUrl: 'help.html'
-      }
-    }
-  })
-})
+      // Default values for the request.
+      var config = {
+        params : {
+          'callback' : 'JSON_CALLBACK',
+          'name' : $scope.name,
+          'tel' : $scope.tel,		  
+          'email' : $scope.email,
+          'subjectList' : $scope.subjectList,
+          'desc' : $scope.comments
+        },
+      };
 
-angular.module("formApp", []).controller("formController", function($scope, $http) {
+      // JSONP request
+      var $promise = $http.jsonp('http://wasmiah.com/dev/insComp.php', config)
+        .success(function(data, status, headers, config) {
+          if (data.status == 'OK') {
+            $scope.name = null;
+            $scope.tel = null;			
+            $scope.email = null;
+            $scope.subjectList = null;
+            $scope.comments = null;
+            $scope.messages = 'Your form has been sent!';
+            $scope.submitted = false;
+          } else {
+            $scope.messages = 'Oops, we received your request, but there was an error processing it.';
+            $log.error(data);
+          }
+        })
+        .error(function(data, status, headers, config) {
+          $scope.progress = data;
+          $scope.messages = 'There was a network error. Try again later.';
+          $log.error(data);
+        })
+        .finally(function() {
+          // Hide status messages after three seconds.
+          $timeout(function() {
+            $scope.messages = null;
+          }, 3000);
+        });
 
-// create a blank object to hold our form information
-// $scope will allow this to pass between controller and view
-$scope.formData = {};
-
-// process the form
-$scope.processForm = function(formData) {
-	$http({
-		method : 'POST',
-		url : 'insComp.php',
-		data : $scope.formData,
-		headers : { 'Content-Type': 'application/x-www-form-urlencoded' } // set the headers so angular passing info as form data (not request payload)
-	})
-		.success(function(data) {
-		console.log(data);
-	if (!data.success) {
-		// if not successful, bind errors to error variables
-		$scope.errorName = data.errors.name;
-		//TODO.. the others
-	} else {
-		// if successful, bind success message to message
-		$scope.message = data.message;
-			}
-		});
-	};
-});
+      // Track the request and show its progress to the user.
+      $scope.progress.addPromise($promise);
+    };
+  });

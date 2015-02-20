@@ -6,7 +6,7 @@
 <title></title>
 
 <!-- stylesheet -->
-<link href="lib/ionic/css" rel="stylesheet">
+<link href="lib/ionic/css/ionic.min.css" rel="stylesheet">
 <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
 <link href="css/style.css" rel="stylesheet">
 
@@ -23,14 +23,15 @@
 
 <!-- script -->
 <script src="cordova.js"></script>
+<script src="js/promise-tracker.js"></script>
 <script src="js/push.js"></script>
 <script src="js/app.js"></script>
 <script src="js/controllers.js"></script>
 <script src="js/services.js"></script>
-<script src="http://www.wasmiah.com/script.js"></script>
+<script src="js/script.js"></script>
 </head>
 
-<body ng-app="formApp" ng-controller="formController">
+<body ng-app="myApp">
   <ion-tabs class="tabs-positive">
     <ion-tab icon="ion-home" ui-sref="home">
       <ion-nav-view name="home"></ion-nav-view>
@@ -63,58 +64,49 @@
 	  <button style="float:right;" class="btn btn-primary btn-xs" onclick="window.plugins.socialsharing.share('Message only')">Share</button>
 	  <ul id="app-status-ul"></ul>
     </div>
-    <!-- SHOW ERROR/SUCCESS MESSAGES
-    <div id="messages" class="well" ng-show="message"></div>
-    -->
     
-    <!-- FORM -->
-    <form ng-submit="processForm(formData)">
-      <!-- NAME -->
-      <div id="name-group" class="form-group" ng-class="{ 'has-error' : errorName }">
-        <input type="text" name="name" class="form-control" placeholder="Name" ng-model="formData.name">
-        <span class="help-block" ng-show="errorName"></span>
-      </div>
-      
-      <!-- TEL -->
-      <div id="tel-group" class="form-group" ng-class="{ 'has-error' : errorTel }">
-        <input type="tel" name="tel" class="form-control" placeholder="Phone number" ng-model="formData.tel">
-        <span class="help-block" ng-show="errorTel"></span>
-      </div>
-      
-      <!-- Email -->
-      <div id="email-group" class="form-group" ng-class="{ 'has-error' : errorEmail }">
-        <input type="email" name="email" class="form-control" placeholder="Email" ng-model="formData.email">
-        <span class="help-block" ng-show="errorEmail"></span>
-      </div>   
+    <h2>AngularJs form</h2>
+    
+    <div data-ng-controller="help">
+    	<div id="messages" class="alert alert-success" data-ng-show="messages" data-ng-bind="messages"></div>
+    	<div data-ng-show="progress.active()" style="color: red; font-size: 50px;">Sending&hellip;</div>
+    	<form name="helpForm" novalidate role="form">
+			<div class="form-group">
+                <span class="label label-danger" data-ng-show="submitted && helpForm.name.$error.required">Required!</span>
+                <input placeholder="Name" type="text" name="name" data-ng-model="name" class="form-control" required />
+    		</div>
 
-      <!-- Select -->
-      <div id="select-group" class="form-group" ng-class="{ 'has-error' : errorSelect }">
-        <select name="select" class="form-control" ng-model="formData.select">
-          <option value="volvo" selected>Volvo</option>
-          <option value="saab">Saab</option>
-          <option value="mercedes">Mercedes</option>
-          <option value="audi">Audi</option>
-        </select>  
-        <span class="help-block" ng-show="errorSelect"></span>
-      </div>       
-
-      <!-- DESCRIPTION -->
-      <div id="desc-group" class="form-group" ng-class="{ 'has-error' : errorDesc }">
-        <input type="text" name="desc" class="form-control" placeholder="Free text" ng-model="formData.desc">
-        <span class="help-block" ng-show="errorDesc"></span>
-      </div>
+            <div class="form-group">
+                <span class="label label-danger" data-ng-show="submitted && helpForm.tel.$error.required">Required!</span>
+                <span class="label label-danger" data-ng-show="submitted && helpForm.$error.tel">Invalid phone numer</span>
+                <input type="tel" placeholder="Phone number" name="tel" data-ng-model="tel" class="form-control" required />
+            </div>            
             
-      <!-- SUBMIT BUTTON -->
-      <button type="submit" class="btn btn-success btn-lg btn-block">
-      	<span class="glyphicon glyphicon-flash"></span> 
-        Submit! 
-      </button>
-      
-    </form>
-    
-    <!-- SHOW DATA FROM INPUTS AS THEY ARE BEING TYPED
-    <pre>	</pre>
-     -->
+            <div class="form-group">
+                <span class="label label-danger" data-ng-show="submitted && helpForm.email.$error.required">Required!</span>
+                <span class="label label-danger" data-ng-show="submitted && helpForm.$error.email">Invalid email!</span>
+                <input type="email" placeholder="email" name="email" data-ng-model="email" class="form-control" required />
+            </div>
+
+		    <div class="form-group">
+                <label for="subjectList">What is your nationality?</label>
+                <span class="label label-danger" data-ng-show="submitted && helpForm.subjectList.$error.required">Required!</span>
+                <select name="subjectList" data-ng-model="subjectList" data-ng-options="id as value for (id, value) in subjectListOptions" class="form-control" required>
+                <option value=""></option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <span class="label label-danger" data-ng-show="submitted && helpForm.comments.$error.required">Required!</span>
+                <textarea placeholder="Description" name="comments" data-ng-model="comments" class="form-control" required></textarea>
+            </div>
+
+		    <button data-ng-disabled="progress.active()" data-ng-click="submit(helpForm)" class="btn btn-default">Submit</button>
+    	</form>
+    </div>
+
   </div>
 </div>
-</body></html>
+
+</body>
+</html>
