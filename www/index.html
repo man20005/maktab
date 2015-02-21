@@ -1,59 +1,46 @@
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
-<title></title>
-
-<!-- stylesheet -->
-<link href="lib/ionic/css/ionic.min.css" rel="stylesheet">
-<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
-<link href="css/style.css" rel="stylesheet">
-
-<!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
-    <link href="css/ionic.app.css" rel="stylesheet">
-    -->
-
-<!-- LOAD JQUERY
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
--->
-
-<!-- ionic/angularjs js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/ionic/1.0.0-beta.14/js/ionic.bundle.js"></script>
-
-<!-- script -->
-<script src="cordova.js"></script>
-<script src="js/promise-tracker.js"></script>
-<script src="js/push.js"></script>
-<script src="js/app.js"></script>
-<script src="js/controllers.js"></script>
-<script src="js/services.js"></script>
-<script src="js/script.js"></script>
-</head>
-
-<body ng-app="myApp">
-  <ion-tabs class="tabs-positive">
-    <ion-tab icon="ion-home" ui-sref="home">
-      <ion-nav-view name="home"></ion-nav-view>
-    </ion-tab>
-    <ion-tab icon="ion-help" ui-sref="help">
-      <ion-nav-view name="help"></ion-nav-view>
-    </ion-tab>
-  </ion-tabs>
-<!--
-      The nav bar that will be updated as we navigate between views.
-    -->
-<ion-nav-bar class="bar-stable">
-  <ion-nav-back-button></ion-nav-back-button>
-</ion-nav-bar>
-<!--
-          The views will be rendered in the <ion-nav-view> directive below
-          Templates are in the /templates folder (but you could also
-          have templates inline in this html file if you'd like).
+<html ng-app="myApp">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+        <title></title>
+        
+        <!-- stylesheet -->
+        <link href="lib/ionic/css/ionic.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
+        <link href="css/style.css" rel="stylesheet">
+        
+        <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
+            <link href="css/ionic.app.css" rel="stylesheet">
+            -->
+        
+        <!-- LOAD JQUERY
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
         -->
-<ion-nav-view></ion-nav-view>
+        
+        <!-- ionic/angularjs js -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/ionic/1.0.0-beta.14/js/ionic.bundle.js"></script>
+        
+        <!-- script -->
+        <script src="cordova.js"></script>
+        <script src="js/promise-tracker.js"></script>
+        <script src="js/push.js"></script>
+        <script src="js/script.js"></script>
+    </head>
 
+<body>
+    <ion-nav-view></ion-nav-view>
+
+<!-------------------------------------- PAGE 1 ---------------------------------------->
+    <script id="page1" type="text/ng-template">
+      <ion-view title="Page 1">
+        <ion-nav-buttons side="left">
+          <button menu-toggle="left"class="button button-icon icon ion-navicon"></button>
+        </ion-nav-buttons>
+
+        <ion-content class="padding">
 <div class="container">
+
   <div class="col-md-6 col-md-offset-3"> 
     <!-- PAGE TITLE -->
     <div class="page-header">
@@ -61,15 +48,15 @@
       	<span class="glyphicon glyphicon-tower"></span> 
         Compete
       </h1>
-	  <button style="float:right;" class="btn btn-primary btn-xs" onclick="window.plugins.socialsharing.share('Message only')">Share</button>
 	  <ul id="app-status-ul"></ul>
     </div>
     
-    <h2>AngularJs form</h2>
+    <h2>AngularJs Form</h2>
     
-    <div data-ng-controller="help">
+    <div data-ng-controller="competeCtrl">
     	<div id="messages" class="alert alert-success" data-ng-show="messages" data-ng-bind="messages"></div>
-    	<div data-ng-show="progress.active()" style="color: red; font-size: 50px;">Sending&hellip;</div>
+<!--    <div data-ng-show="progress.active()" style="color: red; font-size: 50px;">Sending&hellip;</div> -->
+		
     	<form name="helpForm" novalidate role="form">
 			<div class="form-group">
                 <span class="label label-danger" data-ng-show="submitted && helpForm.name.$error.required">Required!</span>
@@ -84,12 +71,12 @@
             
             <div class="form-group">
                 <span class="label label-danger" data-ng-show="submitted && helpForm.$error.email">Invalid email!</span>
-                <input type="email" placeholder="email" name="email" data-ng-model="email" class="form-control" required />
+                <input type="email" placeholder="email" name="email" data-ng-model="email" class="form-control" />
             </div>
 
 		    <div class="form-group">
                 <label for="subjectList">What is your nationality?</label>
-                <select name="subjectList" data-ng-model="subjectList" data-ng-options="id as value for (id, value) in subjectListOptions" class="form-control" required>
+                <select name="subjectList" data-ng-model="subjectList" data-ng-options="id as value for (id, value) in subjectListOptions" class="form-control">
                 <option value=""></option>
                 </select>
             </div>
@@ -99,12 +86,131 @@
                 <textarea placeholder="Your Answer" name="comments" data-ng-model="comments" class="form-control" required></textarea>
             </div>
 
-		    <button data-ng-disabled="progress.active()" data-ng-click="submit(helpForm)" class="btn btn-default">Submit</button>
+		    <button data-ng-disabled="progress.active()" data-ng-click="submit(helpForm)" class="btn btn-success btn-lg btn-block btn-default">
+			<span class="glyphicon glyphicon-flash"></span>
+			Submit</button>
     	</form>
     </div>
 
   </div>
 </div>
+        </ion-content>
 
+		<ion-footer-bar align-title="left" class="bar-assertive">
+		  <div class="buttons">
+		  <h1 class="title">Footer</h1>
+		</ion-footer-bar>
+
+      </ion-view>
+    </script>
+
+<!-------------------------------------- PAGE 2 ---------------------------------------->
+    <script id="page2" type="text/ng-template">
+      <ion-view title="Page 2">
+        <ion-nav-buttons side="left">
+          <button menu-toggle="left"class="button button-icon icon ion-navicon"></button>
+        </ion-nav-buttons>
+
+        <ion-content class="padding">
+          <h2>This is page two!</h2>
+	  
+        </ion-content>
+		
+		<ion-footer-bar align-title="right" class="bar-assertive">
+	  <button class="btn btn-primary btn-xs" onclick="window.plugins.socialsharing.share('Share a text','Page Header','TEXT')">Share</button>
+
+		<form ng-submit="feedbackForm()" data-ng-controller="feedbackCtrl" style="margin-left:auto">	  
+		 <div class="form-group" style="float:left">
+		  <textarea placeholder="Send us your feedback" name="feedback" data-ng-model="feedback" class="form-control" required></textarea>
+		</div>
+		
+		<div style="float:left">
+		 <button data-ng-click="submit(feedbackForm)" class="btn btn-success btn-lg btn-block btn-default">
+		 <span class="glyphicon glyphicon-flash"></span>
+		 Submit</button>						  		  
+		</div>    	
+		</form>			
+		</ion-footer-bar>
+      
+	  </ion-view>
+    </script>
+    
+<!-------------------------------------- PAGE 3 ---------------------------------------->
+    <script id="page3" type="text/ng-template">
+      <ion-view title="Page 3">
+        <ion-nav-buttons side="left">
+          <button menu-toggle="left"class="button button-icon icon ion-navicon"></button>
+        </ion-nav-buttons>
+
+        <ion-content class="padding">
+          <h2>This is page three!</h2>
+	  		  
+        </ion-content>
+
+		<ion-footer-bar align-title="right" class="bar-assertive">
+	  <button class="btn btn-primary btn-xs" onclick="window.plugins.socialsharing.share('Share a text','Page Header','TEXT')">Share</button>
+
+		<form ng-submit="feedbackForm()" data-ng-controller="feedbackCtrl" style="margin-left:auto">	  
+		 <div class="form-group" style="float:left">
+		  <textarea placeholder="Send us your feedback" name="feedback" data-ng-model="feedback" class="form-control" required></textarea>
+		</div>
+		
+		<div style="float:left">
+		 <button data-ng-click="submit(feedbackForm)" class="btn btn-success btn-lg btn-block btn-default">
+		 <span class="glyphicon glyphicon-flash"></span>
+		 Submit</button>						  		  
+		</div>    	
+		</form>			
+		</ion-footer-bar>
+
+      </ion-view>
+    </script>    
+
+<!------------------------------------- SIDE MENU -------------------------------------->
+    <script id="menu" type="text/ng-template">
+      <ion-side-menus>
+
+        <ion-pane ion-side-menu-content>
+
+          <ion-nav-bar class="bar-positive nav-title-slide-ios7 has-tabs-top">
+            <ion-nav-back-button class="button-clear">
+              <i class="icon ion-ios7-arrow-back"></i>
+            </ion-nav-back-button>
+          </ion-nav-bar>
+
+          <ion-nav-view name="menuContent" animation="slide-left-right"></ion-nav-view>
+
+        </ion-pane>
+
+        <ion-side-menu side="left">
+
+          <header class="bar bar-header bar-stable">
+            <h1 class="title">Menu</h1>
+          </header>
+
+          <ion-content class="has-header">
+
+            <div id="menu-items" class="list">
+              <div class="item" ui-sref="app.page1" menu-close>Page 1</div>
+              <div class="item" ui-sref="app.page2" menu-close>Page 2</div>
+              <div class="item" ui-sref="app.page3" menu-close>Page 3</div>
+              <div class="item" ui-sref="app.page4" menu-close>Page 4</div>
+              <div class="item" ui-sref="app.page5" menu-close>Page 5</div>
+              <div class="item" ui-sref="app.page6" menu-close>Page 6</div>
+              <div class="item" ui-sref="app.page7" menu-close>Page 7</div>
+              <div class="item" ui-sref="app.page8" menu-close>Page 8</div>
+              <div class="item" ui-sref="app.page9" menu-close>Page 9</div>
+              <div class="item" ui-sref="app.page10" menu-close>Page 10</div>
+              <div class="item" ui-sref="app.page11" menu-close>Page 11</div>
+              <div class="item" ui-sref="app.page12" menu-close>Page 12</div>			  			  			  		  
+            </div>
+
+          </ion-content>
+
+        </ion-side-menu>
+
+      </ion-side-menus>
+
+    </script>
 </body>
 </html>

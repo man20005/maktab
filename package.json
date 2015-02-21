@@ -19,6 +19,7 @@
     "https://github.com/EddyVerbruggen/SocialSharing-PhoneGap-Plugin.git",
     "org.apache.cordova.splashscreen",
     "com.connectivity.monitor",
-    "nl.x-services.plugins.socialsharing"
+    "nl.x-services.plugins.socialsharing",
+    "nl.x-services.plugins.toast"
   ]
 }
